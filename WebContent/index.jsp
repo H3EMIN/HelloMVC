@@ -13,7 +13,7 @@
 		<a href="/HelloMVC/home?action=login">go to login page</a>
 	</p>
 	<p>
-		<a href="/HelloMVC/home?action=help">go to help page</a>
+		<a href="/HelloMVC/home?action=resister">go to resister page</a>
 	</p>
 	<br />
 
