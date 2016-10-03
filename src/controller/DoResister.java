@@ -1,0 +1,55 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.Customer;
+import service.CustomerService;
+
+/**
+ * Servlet implementation class DoResister
+ */
+@WebServlet("/doResister")
+public class DoResister extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DoResister() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		
+		//Perform business logic. Return a bean as a result.
+		CustomerService service = (CustomerService) CustomerService.getInstance();
+		
+		Customer customer = new Customer(id,password,name,gender,email);
+		service.addCustomer(customer);
+		request.setAttribute("customer", customer);
+		String page = "/view/resisterSuccess.jsp";;
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+		dispatcher.forward(request, response);
+		
+		
+	}
+
+}
